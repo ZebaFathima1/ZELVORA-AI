@@ -1,0 +1,150 @@
+{
+  "theme": "dark",
+  "archetype": "5 (Luxury / Deep Space Tech) mixed with 4 (Swiss / High-Contrast)",
+  "philosophy": "Don't Give Answers. Build Understanding.",
+  "typography": {
+    "fonts": {
+      "heading": "Outfit",
+      "body": "Manrope",
+      "mono": "Space Mono"
+    },
+    "scale": {
+      "h1": "text-5xl md:text-6xl lg:text-7xl tracking-tighter font-medium text-white leading-tight",
+      "h2": "text-3xl sm:text-4xl lg:text-5xl tracking-tight font-medium text-white leading-tight",
+      "h3": "text-xl sm:text-2xl tracking-tight font-medium text-white/90",
+      "body": "text-base leading-relaxed text-white/70",
+      "label": "text-xs tracking-[0.2em] uppercase text-white/50 font-mono"
+    }
+  },
+  "colors": {
+    "background": {
+      "primary": "#0A0A0F",
+      "secondary": "#13131A",
+      "tertiary": "#1C1C24"
+    },
+    "brand": {
+      "primary": "#4F46E5",
+      "accent1": "#06B6D4",
+      "accent2": "#8B5CF6"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "rgba(255, 255, 255, 0.7)",
+      "tertiary": "rgba(255, 255, 255, 0.5)"
+    },
+    "borders": {
+      "subtle": "rgba(255, 255, 255, 0.05)",
+      "medium": "rgba(255, 255, 255, 0.1)"
+    }
+  },
+  "spacing_and_layout": {
+    "container": "max-w-7xl mx-auto px-6 lg:px-8",
+    "section_gap": "py-24 sm:py-32",
+    "grid_bento": "grid grid-cols-1 md:grid-cols-3 gap-6",
+    "card_padding": "p-8"
+  },
+  "surfaces": {
+    "glass_card": "bg-white/[0.02] backdrop-blur-xl border border-white/[0.05] rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+    "glowing_card": "relative overflow-hidden bg-white/[0.02] border border-white/[0.05] rounded-3xl before:absolute before:inset-0 before:bg-gradient-to-br before:from-indigo-500/10 before:to-transparent before:opacity-0 hover:before:opacity-100 transition-opacity duration-500",
+    "dashboard_panel": "bg-[#13131A] border border-white/[0.05] rounded-2xl"
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-white text-black font-medium px-6 py-3 rounded-full hover:bg-white/90 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95",
+      "secondary": "bg-white/[0.05] text-white border border-white/[0.1] font-medium px-6 py-3 rounded-full hover:bg-white/[0.1] transition-all",
+      "magnetic_effect": "Implement framer-motion magnetic hover effect on main CTAs"
+    },
+    "inputs": "bg-[#13131A] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all",
+    "badges": "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full text-xs font-mono"
+  },
+  "motion": {
+    "page_transitions": "framer-motion AnimatePresence with opacity and slight Y translation",
+    "scroll_reveal": "framer-motion whileInView={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 20 }} viewport={{ once: true, margin: '-100px' }}",
+    "micro_interactions": "Scale button down to 0.95 on tap. Add hover glow effects by shifting background positions.",
+    "ai_brain": "Use HTML5 Canvas for a neural network particle system. Particles connected by lines, moving slowly. Blue/Purple colored particles to match brand."
+  },
+  "media": {
+    "images": [
+      {
+        "url": "https://images.pexels.com/photos/30547577/pexels-photo-30547577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "category": "hero_background",
+        "description": "Dynamic abstract depiction of digital circuits with vivid lights and glowing lines. Put this behind the AI brain canvas, very low opacity."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1750969185331-e03829f72c7d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGdsb3dpbmclMjBuZXVyYWwlMjBuZXR3b3JrJTIwZGFya3xlbnwwfHx8fDE3ODE3NjMzODJ8MA&ixlib=rb-4.1.0&q=85",
+        "category": "features_background",
+        "description": "Abstract blue lines and dots on black background. Use as texture for feature cards."
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1622151834677-70f982c9adef?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxzdHVkZW50JTIwc3R1ZHlpbmclMjBkYXJrJTIwbW9kZSUyMGxhcHRvcHxlbnwwfHx8fDE3ODE3NjMzODN8MA&ixlib=rb-4.1.0&q=85",
+        "category": "testimonial_or_about",
+        "description": "Student studying in dark mode. Use in 'Why we are different' or testimonials."
+      }
+    ],
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-1.5, matching brand accent colors (Cyan/Violet)"
+    }
+  },
+  "pages_and_sections": {
+    "landing": [
+      {
+        "id": "hero",
+        "instructions": "Huge text. Animated learning flow text cycle. Background needs to have the canvas-based neural brain visualization. Dark background #0A0A0F fading into gradient."
+      },
+      {
+        "id": "ai_demo",
+        "instructions": "Bento box split. Left: Traditional AI (boring gray text). Right: Mindora AI (glowing bubbles, storytelling UI, rich media). Use Framer Motion for the chat bubbles appearing."
+      },
+      {
+        "id": "why_different",
+        "instructions": "Comparison cards. Hover effects to glow borders."
+      },
+      {
+        "id": "learning_journey",
+        "instructions": "Vertical or horizontal animated timeline connecting nodes. Nodes light up on scroll."
+      },
+      {
+        "id": "features",
+        "instructions": "8 bento box floating cards. Glassmorphism bg-white/[0.02] with subtle internal gradient."
+      },
+      {
+        "id": "metrics",
+        "instructions": "Animated counters using framer motion. Large Typography (Outfit)."
+      },
+      {
+        "id": "testimonials",
+        "instructions": "Modern glass cards sliding horizontally or masonry."
+      },
+      {
+        "id": "cta",
+        "instructions": "Centered, high impact. 'Education Should Create Thinkers, Not Answer Machines.' White primary button."
+      }
+    ],
+    "dashboard": [
+      {
+        "id": "sidebar",
+        "instructions": "Minimal vertical nav. Lucide icons. Highlight active state with Indigo tint."
+      },
+      {
+        "id": "main_content",
+        "instructions": "Top bar with XP/Streak. Cards for Subjects. Main area: AI Learning Companion chat interface (Claude Sonnet 4.5 demo). Weekly goals list."
+      }
+    ],
+    "auth": [
+      {
+        "id": "login_signup",
+        "instructions": "Clean split screen. Left side: Form with glowing inputs. Right side: Dynamic abstract background or AI brain canvas snippet."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Use framer-motion heavily for scroll reveals, layout animations, and hover states.",
+    "Do not use three.js; build the neural brain via HTML5 canvas and JS requestAnimationFrame.",
+    "Import fonts via Google Fonts (Outfit, Manrope, Space Mono). Ensure proper tailwind config mapping.",
+    "Use lucide-react for all icons.",
+    "Use Shadcn UI components for complex interactive pieces (Dialog, Tabs, Select) in the LMS Dashboard, but strip Vercel styles and apply the glassmorphism/dark theme described in surfaces.",
+    "Add data-testid to all actionable items.",
+    "Implement pure dark mode layout. No light mode toggle needed based on the brief."
+  ]
+}
