@@ -7,6 +7,9 @@ import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
 import Dashboard from "@/pages/Dashboard";
 import AIChat from "@/pages/AIChat";
+import Library from "@/pages/Library";
+import Lesson from "@/pages/Lesson";
+import ParentDigest from "@/pages/ParentDigest";
 import "@/App.css";
 
 export default function App() {
@@ -31,6 +34,30 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <AIChat />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/library"
+              element={
+                <ProtectedRoute>
+                  <Library />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/lesson/:slug"
+              element={
+                <ProtectedRoute>
+                  <Lesson />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/parent"
+              element={
+                <ProtectedRoute>
+                  <ParentDigest />
                 </ProtectedRoute>
               }
             />

@@ -6,7 +6,7 @@ import NeuralBrain from "@/components/NeuralBrain";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function Signup() {
-  const [form, setForm] = useState({ name: "", email: "", password: "", grade: 9 });
+  const [form, setForm] = useState({ name: "", email: "", password: "", grade: 9, parent_email: "" });
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
@@ -16,7 +16,9 @@ export default function Signup() {
     e.preventDefault();
     setErr("");
     setLoading(true);
-    const res = await register({ ...form, grade: Number(form.grade) });
+    const payload = { ...form, grade: Number(form.grade) };
+    if (!payload.parent_email) delete payload.parent_email;
+    const res = await register(payload);
     setLoading(false);
     if (res.ok) nav("/dashboard", { replace: true });
     else setErr(res.error);
@@ -82,6 +84,14 @@ export default function Signup() {
                 </select>
               </Field>
             </div>
+
+            <Field label="Parent email (optional)" Icon={Mail}>
+              <input
+                type="email" value={form.parent_email} onChange={set("parent_email")}
+                data-testid="signup-parent-email-input" placeholder="parent@example.com"
+                className="w-full bg-transparent outline-none placeholder:text-white/30"
+              />
+            </Field>
 
             {err && (
               <div className="text-sm text-red-300 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3" data-testid="signup-error">

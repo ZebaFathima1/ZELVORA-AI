@@ -1,0 +1,44 @@
+{
+  "summary": "Iteration 2 full backend + frontend regression for Mindora AI. Backend: 15/15 new pytest tests passed in test_mindora_v2.py (health/version, PATCH /auth/me parent_email, curriculum overview/list/lesson/quiz/complete with route-ordering guard, voice TTS + STT round-trip, visual SVG + image branch, parent preview, send-digest 400 without parent_email, send-digest 200 with Resend test inbox). Frontend: dashboard nav tiles (chat/library/parent) rendered & functional, /library shows 7 grade pills + 4 subject cards + 4 lesson cards for grade 9 science, /lesson/g9s-bio-evolution renders Socratic AI lesson, quiz with 4 MCQs submits and shows scored result with explanations, /parent persists parent_email + send-digest works end-to-end, /chat starter triggers Claude stream + SVG visual ('Photosynthesis: three ingredients transform' with sun, leaf, H2O, CO2, glucose, brand colors) + TTS playback, /signup has optional parent_email input.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "/dashboard", "issues": ["Console warnings: recharts ResponsiveContainer reports width(-1) height(-1) for one of the chart containers on initial mount. Not blocking — render stabilises after layout — but worth adding minWidth/minHeight to silence the warning."]},
+      {"screen": "/chat", "issues": ["Visual generation takes ~30s after stream completes (Claude decider + sometimes Gemini image). Current 'DRAWING VISUAL' indicator is good; consider showing a progress hint or skeleton size so the long wait feels less indeterminate."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_mindora_backend.py",
+    "/app/backend/tests/test_mindora_v2.py",
+    "/app/test_reports/pytest/iter2_results.xml"
+  ],
+  "action_items": [
+    "Optional: fix recharts ResponsiveContainer initial -1/-1 width/height warning on /dashboard.",
+    "Optional: communicate visual-generation latency in chat UI (skeleton or progress bar).",
+    "Note: voice mic test in headless browser cannot grant mic permission, so the recording 'stop' state isn't reachable in CI. Button is rendered, clickable, and wired — confirmed via DOM."
+  ],
+  "critical_code_review_comments": [
+    "server.py is 992 lines — consider splitting into routers/modules (auth, curriculum, voice, visual, parent, chat) for maintainability (>700 line guideline).",
+    "PATCH /auth/me cannot clear parent_email back to None (Pydantic ignores None values in the if-not-None gate). If a user ever wants to remove their parent email, they currently can't. Suggest accepting an explicit sentinel or a separate DELETE endpoint.",
+    "/api/parent/send-digest hard-fails with 500 if Resend raises; consider returning 502 + structured error so the frontend can show a friendly retry message.",
+    "Lesson/quiz JSON parse fallback in /api/curriculum/lesson/{slug} stores degraded content (raw[:600]) in lesson_content cache. If Claude ever returns malformed output once, the bad payload is cached forever. Suggest only caching on successful json.loads, or adding a regenerate endpoint.",
+    "Visual SVG returned by Claude is rendered with dangerouslySetInnerHTML on the frontend (Visual.jsx). Even though we trust the model, consider sanitising with DOMPurify to drop <script>/onload attrs as a defense-in-depth measure.",
+    "@app.on_event('startup'/'shutdown') still deprecated (carried over from iter1); migrate to lifespan context manager."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_mindora_v2.py (new)",
+    "/app/test_reports/pytest/iter2_results.xml (generated)"
+  ],
+  "success_rate": {"backend": "100% (15/15 new + 14/14 iter1 still green)", "frontend": "100% of listed flows"},
+  "test_credentials": "Admin: admin@mindora.ai / Admin@Mindora2026. Test student emails created via /auth/register with unique timestamp+uuid prefix.",
+  "seed_data_creation": "Each run: 1 fresh student (no-parent) via /auth/register for the send-digest negative test, 1 quiz completion on g9s-bio-evolution for admin (+50 XP, completed_lessons doc), 1 digest_log row to delivered@resend.dev (Resend test inbox, no real delivery).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live in /app/backend/tests/{test_mindora_backend.py, test_mindora_v2.py}. New testids verified on frontend: dashboard-nav-{chat|library|parent} (need ~2s post-login layout to settle), library-page, grade-pill-{6..12}, subject-card-{math|science|english|coding}, lesson-card-{slug}, lesson-page, lesson-start-quiz-btn, quiz-question-{0..3}, quiz-option-{i}-{j}, quiz-submit-btn, quiz-result, parent-page, parent-email-input, parent-email-save-btn, parent-send-btn, signup-parent-email-input, visual-block, visual-svg, voice-record-btn, tts-btn-{i}. SVG visual takes 20-35s to appear after stream ends — wait at least 40s with polling. lesson_content + lesson_quiz are cached per-slug; first generation is slow (~5-15s), subsequent are instant. Resend sender is onboarding@resend.dev; for deliverability tests use parent_email='delivered@resend.dev' (Resend test inbox).",
+  "rca of the issue": "No bugs reproduced this iteration. All 25+ specific test cases from the review request passed."
+}

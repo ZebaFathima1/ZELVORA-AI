@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   Brain, Flame, Trophy, LogOut, Sparkles, MessageSquareText,
   Calculator, FlaskConical, BookOpen, Code2, TrendingUp, Target, ArrowRight,
+  Library as LibraryIcon, Mail,
 } from "lucide-react";
 import { LineChart as RLineChart, Line, ResponsiveContainer, XAxis, YAxis, Tooltip, CartesianGrid } from "recharts";
 import { api } from "@/lib/api";
@@ -78,6 +79,52 @@ export default function Dashboard() {
             Pick up where you left off. Today's focus: build deeper understanding, not just complete tasks.
           </p>
         </motion.div>
+
+        {/* Quick nav */}
+        <div className="mt-8 grid sm:grid-cols-3 gap-4">
+          <Link
+            to="/chat"
+            data-testid="dashboard-nav-chat"
+            className="group rounded-2xl glass p-5 hover:bg-white/[0.05] transition-colors flex items-center gap-4"
+          >
+            <div className="w-11 h-11 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center">
+              <MessageSquareText className="w-5 h-5 text-indigo-300" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm text-white">AI Companion</div>
+              <div className="text-xs text-white/40">Talk or type with Mindora</div>
+            </div>
+            <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/80 transition-colors" />
+          </Link>
+          <Link
+            to="/library"
+            data-testid="dashboard-nav-library"
+            className="group rounded-2xl glass p-5 hover:bg-white/[0.05] transition-colors flex items-center gap-4"
+          >
+            <div className="w-11 h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center">
+              <LibraryIcon className="w-5 h-5 text-cyan-300" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm text-white">Lesson Library</div>
+              <div className="text-xs text-white/40">100+ lessons · grades 6-12</div>
+            </div>
+            <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/80 transition-colors" />
+          </Link>
+          <Link
+            to="/parent"
+            data-testid="dashboard-nav-parent"
+            className="group rounded-2xl glass p-5 hover:bg-white/[0.05] transition-colors flex items-center gap-4"
+          >
+            <div className="w-11 h-11 rounded-xl bg-violet-500/15 border border-violet-500/30 flex items-center justify-center">
+              <Mail className="w-5 h-5 text-violet-300" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm text-white">Parent Digest</div>
+              <div className="text-xs text-white/40">Share your progress at home</div>
+            </div>
+            <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/80 transition-colors" />
+          </Link>
+        </div>
 
         {/* Stats row */}
         <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
